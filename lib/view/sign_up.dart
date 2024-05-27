@@ -59,7 +59,7 @@ class SignUp extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage(),));
                 },
-                child: Text('Sign in'),
+                child: Text('Sign up'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blue, // updated from primary
                   foregroundColor: Colors.white, // updated from onPrimary
