@@ -1,14 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:para_recommand_app/user_auth/firebase_auth_services.dart';
 
 import 'homepage/HomePage.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
   @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  TextEditingController email = TextEditingController();
+  TextEditingController pass = TextEditingController();
+
+  @override
   Widget build(BuildContext context) {
+    final FirebaseAuthService firebaseAuthService = FirebaseAuthService();
     return Scaffold(
+
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -16,20 +27,23 @@ class LoginPage extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                LottieBuilder.asset("assets/lottie/Animation - 1716739797493.json"),
+                LottieBuilder.asset(
+                    "assets/lottie/Animation - 1716739797493.json"),
                 const Text(
                   'Nice to see you again',
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 32),
-                const TextField(
+                TextField(
+                  controller: email,
                   decoration: InputDecoration(
                     labelText: 'Email',
                     border: OutlineInputBorder(),
                   ),
                 ),
                 const SizedBox(height: 16),
-                const TextField(
+                TextField(
+                  controller: pass,
                   decoration: InputDecoration(
                     labelText: 'Enter password',
                     border: OutlineInputBorder(),
@@ -57,8 +71,17 @@ class LoginPage extends StatelessWidget {
                 ),
                 SizedBox(height: 16),
                 ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage(),));
+                  onPressed: () async {
+                    final message = await firebaseAuthService.signInWithEmailAndPassword(email.text,pass.text);
+                    if (message!.contains('Success')) {
+                      Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(builder: (context) =>  HomePage()));
+                    }
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(message),
+                      ),
+                    );
                   },
                   child: Text('Sign in'),
                   style: ElevatedButton.styleFrom(

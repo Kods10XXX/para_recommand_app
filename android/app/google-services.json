@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "623060896760",
+    "project_id": "para-recommand-app",
+    "storage_bucket": "para-recommand-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:623060896760:android:54206a5cfb6cb3f48da40d",
+        "android_client_info": {
+          "package_name": "com.example.para_recommand_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRzqQTri8-663T0T8enauEXe_UC6TzBec"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
